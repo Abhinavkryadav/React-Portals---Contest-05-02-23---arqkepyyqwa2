@@ -1,23 +1,26 @@
-import React ,{useState, useRef} from 'react'
-import '../styles/App.css';
-import PortalButton from "./PortalButton";
-import PortalTextArea from "./PortalTextArea";
+import React, { useState, useRef } from "react";
+import "../styles/App.css";
+import PortalButton from "./PortalButton.js";
+import PortalTextArea from "./PortalTextArea.js";
 
-function App() {
-  const [text, setText] = useState("");
-
-  const handleTextChange = (event) => {
-    setText(event.target.value);
+//complete the function
+const App = () => {
+  const inpref = useRef(null);
+  const [val, setVal] = useState("");
+  const changeText = () => {
+    setVal(inpref.current.value);
+    inpref.current.value = "";
   };
 
   return (
-    <>
-      <input id="input" type="text" onChange={handleTextChange} />
-      <PortalButton text={text} />
-      <PortalTextArea />
-    </>
+    <div id="main">
+      <input id="input" ref={inpref}></input>
+      <br />
+      <PortalButton buttonclick={changeText} />
+      <br />
+      <PortalTextArea valu={val} />
+    </div>
   );
-}
+};
 
 export default App;
-
