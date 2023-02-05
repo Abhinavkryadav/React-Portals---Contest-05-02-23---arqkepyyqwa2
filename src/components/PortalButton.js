@@ -1,15 +1,29 @@
-import React from 'react';
-import  ReactDOM  from 'react-dom';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
-//complete this function using portals
-const PortalButton=()=>{
-    return (
-        <div>
-            <button id="button" onClick={}>Click</button>
-        </div>
-        
-    )
+function PortalButton({ text }) {
+  const [showText, setShowText] = useState(false);
+
+  const handleClick = () => {
+    setShowText(true);
+  };
+
+  return ReactDOM.createPortal(
+    <>
+      <button id="button" onClick={handleClick}>
+        Click
+      </button>
+      {showText && (
+        <textarea
+          id="text-field"
+          value={text}
+          readOnly
+          style={{ display: "none" }}
+        />
+      )}
+    </>,
+    document.getElementById("portal-button")
+  );
 }
-export default PortalButton;
 
-//portal-button id will be used here for portal purpose
+export default PortalButton;
